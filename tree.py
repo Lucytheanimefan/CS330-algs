@@ -33,6 +33,31 @@ class BinaryTree():
 				temp = temp.left
 				self.insert(key, temp)
 
+	def search(self, key, temp=None):
+		if temp is None:
+			temp = self.root
+		if self.root.key is key:
+			return 0
+		elif key > temp.key:
+			if key is temp.right.key:
+				return str(temp.right)
+			else:
+				temp = temp.right
+				self.search(key, temp)
+		elif key < temp.key:
+			print(str(key)+" < "+str(temp.key))
+			if key is temp.left.key:
+				print(str(key)+"=="+str(temp.left))
+				print("EQUAL")
+				print("Return this: "+str(temp.left))
+				return str(temp.left)
+			else:
+				temp = temp.left
+				print("New temp: "+str(temp))
+				self.search(key, temp)
+		else:
+			return "not found"
+
 
 if __name__ == "__main__":
 	tree = BinaryTree()
@@ -41,11 +66,7 @@ if __name__ == "__main__":
 	tree.insert(4)
 	tree.insert(6)
 	tree.insert(3)
-	print(tree.root)
-	print(tree.root.right)
-	print(tree.root.left)
-	print(tree.root.right.left)
-	print(tree.root.left.left)
+	print(tree.search(3))
 
 
 
