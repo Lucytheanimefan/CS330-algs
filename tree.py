@@ -7,13 +7,29 @@ class Node:
 		self.height = 1
 
 	def __str__(self):
-		return (str(self.key) +", "+ str(self.value))
+		return ("["+str(self.key) +": "+ str(self.value)+"]")
 
 class BinaryTree():
 	def __init__(self):
 		self.root = None
 		self.height = 0
 		self.balance = 0
+
+	def print_tree(self, node=None):
+		if node is None:
+			node = self.root
+		if self.root is None:
+			print "EMPTY"
+		else:
+			ndR = node.right
+			print("Right of "+str(node)+": "+str(ndR))
+			if ndR is not None:
+				self.print_tree(ndR)
+			ndL = node.left
+			print("Left of "+str(node)+": "+str(ndL))
+			if ndL is not None:
+				self.print_tree(ndL)
+
 
 	def insert(self, key, value = None, temp=None):
 		if temp is None:
@@ -67,7 +83,8 @@ if __name__ == "__main__":
 	tree.insert(4)
 	tree.insert(6)
 	tree.insert(3,11)
-	print(tree.search(3))
+	#print(tree.search(3))
+	tree.print_tree()
 
 
 

@@ -43,9 +43,6 @@ def merge(A, iBegin, iMiddle, iEnd, B):
 def fullMergeSort(A):
 	B = list(A)
 	n = len(A)
-	print(A)
-	print(B)
-	print(n)
 	return mergesort(B,0,n,A)
 
 
