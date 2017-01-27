@@ -1,12 +1,13 @@
 class Node:
-	def __init__(self, key):
+	def __init__(self, key, value=None):
 		self.left = None
 		self.right = None
 		self.key = key
+		self.value = value
 		self.height = 1
 
 	def __str__(self):
-		return "%s" %self.key
+		return (str(self.key) +", "+ str(self.value))
 
 class BinaryTree():
 	def __init__(self):
@@ -14,24 +15,24 @@ class BinaryTree():
 		self.height = 0
 		self.balance = 0
 
-	def insert(self, key, temp=None):
+	def insert(self, key, value = None, temp=None):
 		if temp is None:
 			temp = self.root
 		if self.root is None:
 			#set the root as the node
-			self.root = Node(key)
+			self.root = Node(key,value)
 		elif key > temp.key:
 			if temp.right is None:
-				temp.right = Node(key)
+				temp.right = Node(key,value)
 			else:
 				temp = temp.right
-				self.insert(key, temp)
+				self.insert(key, value, temp)
 		elif key < temp.key:
 			if temp.left is None:
-				temp.left = Node(key)
+				temp.left = Node(key,value)
 			else:
 				temp = temp.left
-				self.insert(key, temp)
+				self.insert(key, value, temp)
 
 	def search(self, key, temp=None):
 		if temp is None:
@@ -61,11 +62,11 @@ class BinaryTree():
 
 if __name__ == "__main__":
 	tree = BinaryTree()
-	tree.insert(5)
+	tree.insert(5,6)
 	tree.insert(7)
 	tree.insert(4)
 	tree.insert(6)
-	tree.insert(3)
+	tree.insert(3,11)
 	print(tree.search(3))
 
 
