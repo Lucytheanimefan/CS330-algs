@@ -1,6 +1,7 @@
 '''
 Given an array of jobs where every job has a deadline and associated profit if the job is finished before the deadline. It is also given that every job takes single unit of time, so the minimum possible deadline for any job is 1. How to maximize total profit if only one job can be scheduled at a time.
 '''
+
 from operator import itemgetter
 def jobSequence(jobs):
 	sort_jobs = sorted(jobs, key=itemgetter(1)) 
@@ -36,6 +37,34 @@ def jobSequence(jobs):
 	print(results)
 	return results
 
+def recurseCash(sortedNetCash):
+	#print('sortedNetCash:s')
+	#print(sortedNetCash)
+	Pd = 0
+	maxDebtor = sortedNetCash[Pd][1]
+	length = len(sortedNetCash)
+	Pc = length-1
+	maxCreditor = sortedNetCash[Pc][1]
+
+	minAmount = min(maxDebtor, maxCreditor)
+	if len(sortedNetCash)<2:
+		return;
+	print("Person "+str(sortedNetCash[0][0])+" pays "+str(abs(sortedNetCash[Pd][1])) + " to Person "+ str(sortedNetCash[Pc][0]))
+
+	if minAmount is maxCreditor:
+		#print("minAmount is maxCreditor")
+		sortedNetCash.pop() #remove creditor who already gets money back
+
+	if minAmount is maxDebtor:
+		#print("minAmount is maxDebtor")
+		sortedNetCash.pop(0)
+
+	#print("sortedNetCash after popping")
+	#print(sortedNetCash)
+
+	recurseCash(sortedNetCash)
+
+
 def minimizeCash(cash):
 	n = len(cash)
 	netCash = {k:0 for k in range(n)}
@@ -45,8 +74,13 @@ def minimizeCash(cash):
 			netCash[j] = cash[i][j] + netCash[j]
 			netCash[i] = netCash[i] - cash[i][j]
 
+	sortedNetCash = list(sorted(netCash.items(), key=itemgetter(1)))
+	#print("Sorted net cash:")
+	#print(sortedNetCash)
+	recurseCash(sortedNetCash)
 
-	print netCash
+	
+
 
 
 
@@ -58,7 +92,8 @@ if __name__ == "__main__":
 	jobs = [ ['a', 2, 100], ['b', 1, 19], ['c', 2, 27], ['d', 1, 25], ['e', 3, 15],['f', 1, 35],['g', 4, 25],['h', 4, 15]]
 	#jobSequence(jobs)
 
-	cashes = [[0, 1000, 2000],[0, 0, 5000],[0, 0, 0]];
+	cashes = [[0, 1000, 2000],
+	[0, 0, 5000],
+	[0, 0, 0]];
 	#{0: -3000, 1: -4000, 2: 7000}
-
 	minimizeCash(cashes)
