@@ -36,8 +36,29 @@ def jobSequence(jobs):
 	print(results)
 	return results
 
+def minimizeCash(cash):
+	n = len(cash)
+	netCash = {k:0 for k in range(n)}
+	print(netCash)
+	for i in range(n):
+		for j in range(n):
+			netCash[j] = cash[i][j] + netCash[j]
+			netCash[i] = netCash[i] - cash[i][j]
+
+
+	print netCash
+
+
+
+
+
 
 if __name__ == "__main__":
 	#job, deadline, profit
 	jobs = [ ['a', 2, 100], ['b', 1, 19], ['c', 2, 27], ['d', 1, 25], ['e', 3, 15],['f', 1, 35],['g', 4, 25],['h', 4, 15]]
-	jobSequence(jobs)
+	#jobSequence(jobs)
+
+	cashes = [[0, 1000, 2000],[0, 0, 5000],[0, 0, 0]];
+	#{0: -3000, 1: -4000, 2: 7000}
+
+	minimizeCash(cashes)
