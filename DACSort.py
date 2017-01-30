@@ -45,18 +45,6 @@ def selection(A, k):
 			A1.append(A[i])
 		elif A[i]>p:
 			A3.append(A[i])
-	print("A1: ")
-	print(A1)
-	print("A2: ")
-	print(A2)
-	print("A3: ")
-	print(A3)
-	
-	print("------A: ")
-	print(A)
-	print("index: ")
-	print(index)
-	print("k: "+str(k))
 	if k < index:
 		return selection(A1, k)
 	elif A[index] is original_A[k]:

@@ -14,7 +14,7 @@ def sort(start, finish):
 		if prevFinish is None:
 			activities.append(i)
 			prevFinish = sortFinish[i]
-		elif start[i]>prevFinish:
+		elif start[i]>prevFinish: #if the next start time is after the previous finish, aka no overlap
 			activities.append(i)
 			prevFinish = sortFinish[i]
 
