@@ -12,6 +12,16 @@ class Node:
 		return letter + ": "+freq
 
 
+class InternalNode:
+	def __init__(self, value):
+		self.value = value
+		self.left = None
+		self.right = None
+
+	def __str__(self):
+		return value
+
+
 
 class HuffmanTree:
 	def __init__(self):
@@ -23,3 +33,6 @@ class HuffmanTree:
 		elif head.right and freq > :
 
 
+
+if __name__ == "__main__":
+	tree = HuffmanTree()
