@@ -57,33 +57,36 @@ def minStoresR(A, i, numStores):
 	if abs(A[i+1]-A[i])<=1:
 		numStores+=1
 		minStoresR(A[(i+2):], 0, numStores)
-	elif abs(A[i+1]-A[i])>1:
+	elif abs(A[i+1]-A[i])>1 and abs(A[i+1]-A[i])<=2:
 		numStores+=1
 		minStoresR(A[(i+1):],0,numStores)
 
 
-
-	'''
-	if n is 0:
+def edit_distance(word1, word2):
+	n = len(word1)
+	m = len(word2)
+	if word1 is word2:
 		return 0
-	if n is 1:
-		return 1 #//just need 1 store for the 1 home
-	if n is 2:
-		if abs(A[0]-A[1])<=2:
-			return 1
-		else:
-			return 2
-	return minStoresR(A[:n/2], len(A[:n/2]))+ minStoresR(A[n/2:], len(A[n/2:]))	
-	'''
+	if m is 0:
+		return n
+	if n is 0:
+		return m
+	if word1[n-1] is word2[m-1]: #last characters are the same
+		return edit_distance(word1[:n-1], word2[:m-1])
+	else:
+		return 1+ min(edit_distance(word1[:n-1], word2[:m-1]), 
+			edit_distance(word1[:n-1],word2[:m]), 
+			edit_distance(word1[:n], word2[:m-1]))
+
 
 
 
 if __name__ == "__main__":
-	A = [1,2,3,4,5,6,7,8,9]
+	A = [1,3,5,7,9]
 	#print("Should be 2 stores")
 	numStores = 0
-	print("FINAL")
-	print(str(minStoresR(A,0,numStores)))
+	
+	print (edit_distance("sunday","saturday"))
 
 
 
